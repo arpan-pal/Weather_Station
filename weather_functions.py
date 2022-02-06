@@ -25,7 +25,7 @@ def print_system_info(display):
 def update_quote():
     quote_url = 'https://www.quotepub.com/api/widget/?type=qotd_t'
     quote_data = requests.get(quote_url).json()
-    quote = "No suitable quote found today. Just wanted to remind you, Arpan loves you. ;)"
+    quote = "Your default quote goes here."
     max_len = 105
     if len(quote_data['quote_body']+quote_data['quote_author'])<max_len:
         quote = quote_data['quote_body']+' -'+quote_data['quote_author']

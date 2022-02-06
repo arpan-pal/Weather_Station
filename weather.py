@@ -92,7 +92,7 @@ weather_draw.text((width//2+60,10),city_2+','+state_2, font=sans_bold80,fill=10)
 
 epd.frame_buf.paste(weather_image, (0,0))
 epd.draw_full(constants.DisplayModes.GL16)
-quote = "No quote found yet. Just wanted to remind you, Arpan loves you. ;)"
+quote = "Your default quote goes here"
 quote_update_time = 0
 #save_online_image = 1      # Indicator variable whether to save the image when the system is online and the weather data is being displayed.
 #save_ofline_image = 1      # Indicator variable whether to save the image when the system is ofline and the weather data is not being displayed.
