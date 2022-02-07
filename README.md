@@ -7,5 +7,5 @@ What it does is, it takes two zip codes as inputs and uses the python library us
 By default ther weather data and the screen refresh every 10 minutes and in case you lost your internet connection it shows the message "Waiting for internet...' on the screen and checks back in every 30 seconds to see if it is online. Check out the images 'weather_online.png', 'weather_ofline.png' and 'online_layout.png' to get more information on how the data and messages are displayed.
 
 I also used the narrow black band towards the bottom to display a quote of the day. By default it refresh every 12 hours. I used an api from https://www.quotepub.com/ for getting that. Look in the file _weather_functions.py_ for more details.
-##Drivers
+## Drivers
 Lastly and most importantly the display I am using is controled by the IC _IT8951_. I used the code from this Git repo: https://github.com/GregDMeyer/IT8951 to set up the interface and control it through python.
