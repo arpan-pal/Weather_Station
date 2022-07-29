@@ -32,7 +32,9 @@ I also used the narrow black band towards the bottom to display a quote of the d
 Finally, I have been able to get help from a friend of mine in the engineering department and he helped me design and 3D-print a case for the screen and the boards. Here is how the final product looks in the case:
 
 ---
-<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult1.jpg?raw=true" width = "275" height = "230"> <img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult2.jpg?raw=true" width = "275" height = "230">
+<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult1.jpg?raw=true" width = "800" height = "500"> 
+
+<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult2.jpg?raw=true" width = "800" height = "500">
 
 ---
 
