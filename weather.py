@@ -418,6 +418,7 @@ while(True):
             weather_image.save('weather_ofline.png')    # Saving the image which is generated when when the system is ofline and the weather is not being displayed
             os.chmod('weather_ofline.png',stat.S_IRWXG | stat.S_IRWXO | stat.S_IRWXU)      # Changing the default permission and granting permission to all users
             save_ofline_image = 0'''
+    
             
         epd.frame_buf.paste(weather_image, (0,0))   # Showing ofline weather image on the screen with partial update
         epd.draw_partial(constants.DisplayModes.GL16)
