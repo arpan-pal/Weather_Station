@@ -11,14 +11,14 @@ What it does is, it takes two zip codes as inputs and uses the python library us
 By default the weather data and the screen refresh every 10 minutes and in case you lost your internet connection it shows the message _"Waiting for internet...'_ on the screen and checks back in every 30 seconds to see if it is online. In that case the screen layout looks like this:
 
 ---
-<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/weather_ofline.png?raw=true" width = "500" height = "350">
+<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/weather_ofline.png?raw=true" width = "1000" height = "750">
 
 ---
 
 After it gets connected with the internet and fetches the weather data successfully, the screen layout remains the same but the blocks populates with weather information. Here is an example of the screen layout when the system is online:
 
 ---
-<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/weather_online.png?raw=true" width = "500" height = "350">
+<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/weather_online.png?raw=true" width = "1000" height = "700">
 
 ---
 
@@ -32,7 +32,7 @@ I also used the narrow black band towards the bottom to display a quote of the d
 Finally, I have been able to get help from a friend of mine in the engineering department and he helped me design and 3D-print a case for the screen and the boards. Here is how the final product looks in the case:
 
 ---
-<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult1.jpg?raw=true" width = "250" height = "175"> <img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult2.jpg?raw=true" width = "250" height = "175">
+<img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult1.jpg?raw=true" width = "500" height = "350"> <img src = "https://github.com/arpan-pal/Weather_Station/blob/main/FinalResult2.jpg?raw=true" width = "500" height = "350">
 
 ---
 
