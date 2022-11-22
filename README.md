@@ -44,7 +44,7 @@ Finally, I have been able to get help from a friend of mine in the engineering d
 
 ## Coming soon...
 
-I have made some further improvements to this and have added a temperature and humidity sensor to the weather station. So now I have access to the room temperature and himidity data and slightly changed the layout of the display to make room for displaying those data. I have the updated code and for that and will update it the next chance I get to work on this fun project. 
+I have made some further improvements to this and have added a temperature and humidity sensor to the weather station. So now I have access to the room temperature and himidity data and slightly changed the layout of the display to make room for displaying those data. I have the updated code for that and will update it the next chance I get to work on this fun project. 
 
 Also I have a plan to set it up in a way so that every time I restart the Raspberry Pi, it syncs with the version of code present in the github. That way I'll be able to make changes and improvements remotely on the screen.
 
