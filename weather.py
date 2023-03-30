@@ -1,10 +1,6 @@
 '''
 This file is the main file of this project. This takes zip codes of two cities as input, 
-and then extracts informations about them like name of the city, state, lattitute and longitude.
-Then it uses those information to extract weather data using the 'openweathermap' api.
-Then it shows on the e-paper display in my designed layout along with a quote of the day.
-Check out the image files 'weather_online.png', 'weather_ofline.png' and 'online_layout.png'
-to find out the data displaying layout.
+and then extracts informations about them like name of the city, state and
 '''
 
 import sys
@@ -17,15 +13,16 @@ import datetime
 import uszipcode
 from IT8951.display import AutoEPDDisplay, VirtualEPDDisplay
 from IT8951 import constants
-from weather_functions import *     # I wrote some helpful functions here. In future I plan to clean the code up and move some of the work as functions in this file.
-from weather_fonts import *     # I just used this file to define some of the fonts along with their sizes I wanted. I ended up using only two fonts but you can use many more and make the project look much cooler.
+from weather_functions import *
+from weather_fonts import *
+import Adafruit_DHT
 
-# Zipcode of cities you are interested in. If you are not interested in two cities then repeat the same zipcode but do not leave one blank.
-zip_1 = 77801
-zip_2 = 77801
 
-api_key_current = ""        # Your API Key
-api_key_forecast = ""       # Your API Key for the onecall api. This is little delicate. If you have a free account then they'll not let you call the onecall API more than 1000 times in 24 hours. Both the keys can be same.
+zip_1 = 79415
+zip_2 = 77840
+
+api_key_current = "f31a4ef638304f763a223bd5d694ef86"
+api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
 
 #Extracting information from zip_1
 search = uszipcode.SearchEngine()
@@ -47,7 +44,7 @@ lng_2 = str(zip_info_2['lng'])
 
 
 print('\nProcess started.\n')
-epd = AutoEPDDisplay(vcom = -1.52, rotate = None, spi_hz=60000000)
+epd = AutoEPDDisplay(vcom = -1.52, rotate = 'flip', spi_hz=60000000)
 print_system_info(epd)
 epd.clear()
 
@@ -61,15 +58,15 @@ wind_img.load()
 wind_img = wind_img.resize((120,120))
 
 
-# Creating the layout
+#Creating the layout
 width,height= epd.width,epd.height
 w2 = int(width/2)
 epd.frame_buf.paste(0xFF, box=(0, 0, width, height))
 weather_image = Image.new('L', (width,height), 255)
 weather_draw = ImageDraw.Draw(weather_image)
-weather_draw.line((0,110,width,110), width=6,fill=0)    # Top row for city names
+weather_draw.line((0,110,width,110), width=6,fill=0)    #Top row for city names
 weather_draw.line((w2,0,w2,height-70), fill = 0, width = 6)     # Dividor line at the middle between two city columns
-weather_draw.rectangle((w2-325,height-70,w2+325,height), fill=0)    #Bottom rectangle for showing last update time
+weather_draw.rectangle((0,height-90,width,height), fill=0)    #Bottom rectangle for showing last update time
 weather_draw.rectangle((0,400,width,460), fill = 0)     # Narrow black band below current weather tab, separating it from hourly forecast
 weather_draw.rectangle((0,970,width,1030), fill = 0)    # Narrow black band below hourly forecast tab, separating it from daily forecast
 weather_image.paste(therm_img,(0,115))
@@ -80,19 +77,19 @@ weather_draw.text((w2+440,125),'Feels like:',font = sans_it60, fill=0)
 weather_image.paste(wind_img, (5+w2,270))
 
 
-# Filling in the information for zip_1
+#Filling in the information for zip_1
 weather_draw.text((60,10),city_1+','+state_1, font=sans_bold80,fill=10)
 
-# Filling in the information for zip_2
+#Filling in the information for zip_2
 weather_draw.text((width//2+60,10),city_2+','+state_2, font=sans_bold80,fill=10)
 
 
-#weather_image.save('online_layout.png')    # Saving the layout image when the system would be online
+#weather_image.save('online_layout.png')    # Saving the layout image
 #os.chmod('online_layout.png',stat.S_IRWXG | stat.S_IRWXO | stat.S_IRWXU)      # Changing the default permission and granting permission to all users
 
 epd.frame_buf.paste(weather_image, (0,0))
 epd.draw_full(constants.DisplayModes.GL16)
-quote = "Your default quote goes here"
+quote = "No quote found yet. Just wanted to remind you, Arpan loves you. ;)"
 quote_update_time = 0
 #save_online_image = 1      # Indicator variable whether to save the image when the system is online and the weather data is being displayed.
 #save_ofline_image = 1      # Indicator variable whether to save the image when the system is ofline and the weather data is not being displayed.
@@ -124,15 +121,14 @@ while(True):
         weather_image.paste(white_mask, (5,1040))
         weather_image.paste(white_mask, (5+w2,1040))   
         
-        weather_draw.rectangle((w2-325,height-70,w2+325,height), fill=0) #Bottom rectangle for showing last update time
+        weather_draw.rectangle((0,height-90,width,height), fill=0) #Bottom rectangle for showing last update time
         
         
         
         
         print("\n\nUpdating frist city's weather...\n")
         
-        forecast_url = "http://api.openweathermap.org/data/2.5/onecall?lat="+lat_1
-        forecast_url+= "&lon="+lng_1+"&exclude=minutely,current,alerts&units=imperial&appid="
+        forecast_url = "http://api.openweathermap.org/data/2.5/onecall?lat="+lat_1+"&lon="+lng_1+"&exclude=minutely,current,alerts&units=imperial&appid="
         forecast_url+= api_key_forecast
         
         current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%d&units=imperial&id=524901&appid="%(zip_1)
@@ -140,7 +136,6 @@ while(True):
         
         weather_forecast_1 = requests.get(forecast_url).json()
         weather_now_1 = requests.get(current_url).json()
-        
         print('\nUpdating hourly forecast...\n')
         count = 0
         for i in weather_forecast_1['hourly']:
@@ -173,6 +168,7 @@ while(True):
             if count == 6:
                 print('\nHourly forecast update complete.\n')
                 break
+        
         
         print('\nUpdating daily forecast...\n')
         count = 0
@@ -207,6 +203,11 @@ while(True):
                 break
                     
                     
+                    
+                    
+                    
+            
+            
         print('\nUpdating currnet weather...\n')
         temp_now_1 = '%d'%(round(weather_now_1['main']['temp']))
         temp_now_1+= u"\N{DEGREE SIGN}"+'F'
@@ -244,16 +245,12 @@ while(True):
         weather_draw.text((650,350),'Humidity: '+humid_1+'%',font = sans_it40, fill = 50)
         weather_draw.text((10,410),'Max: '+temp_max_1+'   Min: '+temp_min_1+',   '+description_1, font = sans40, fill = 255)
         print('\nCurrent weather update complete.\n')
-        
         print("\nFrist city's weather update complete.\n\n")
             
             
-        
-        
         print("\n\nUpdating second city's weather...\n")
         
-        forecast_url = "http://api.openweathermap.org/data/2.5/onecall?lat="+lat_2
-        forecast_url+= "&lon="+lng_2+"&exclude=minutely,current,alerts&units=imperial&appid="
+        forecast_url = "http://api.openweathermap.org/data/2.5/onecall?lat="+lat_2+"&lon="+lng_2+"&exclude=minutely,current,alerts&units=imperial&appid="
         forecast_url+= api_key_forecast
         
         current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%d&units=imperial&id=524901&appid="%(zip_2)
@@ -367,8 +364,6 @@ while(True):
         print('\nCurrent weather update complete.\n')
         print("\nSecond city's weather update complete.\n\n")
         
-        
-        # The quote updates every 12 hours.
         if quote_update_time+43200 < time.time():
             quote = update_quote()
             quote_update_time = time.time()
@@ -380,7 +375,20 @@ while(True):
         date_now = time.strftime('%m/%d/%Y')
         date_now = date_now[:-4]+date_now[-2:]
         
-        weather_draw.text((w2-300,height-55),update_time+',  '+date_now, font = sans40, fill = 255)
+        weather_draw.text((w2+150,height-70),update_time+',  '+date_now, font = serif50, fill = 255) # Writing the last update time and date on the bottom bar
+        
+        try:
+            room_humid, room_temp_C = Adafruit_DHT.read_retry(22,4) # Reading the room temperature and humidity
+        except:
+            room_humid = 0
+            room_temp_C = -44
+        
+        room_temp = 'Temp: %d'%round((room_temp_C*1.8)+32)
+        room_temp+= u"\N{DEGREE SIGN}"+'F'
+        room_humidity = 'Humid: %d'%round(room_humid)
+        room_humidity+='%'
+        
+        weather_draw.text((10,height-70),room_temp+'         '+room_humidity,font = sans50, fill = 255) #Writing the room temperature and humidity on the bottom bar
         
         '''if save_online_image == 1:
             weather_image.save('weather_online.png')    # Saving the image which is generated when when the system is online and the weather is being displayed
@@ -392,7 +400,7 @@ while(True):
         print('\nOne iteration complete. Last updated:'+update_time+', '+date_now)
         time.sleep(600)
     except:
-        #This will print the message 'Waiting for internet...' on the display. If some error occours by default it'll assume that the internet is not connected and so will show this message.
+        #This will print the message 'Waiting for internet...' on the display.
         print('\nCould not connect to the internet.\n')
         white_mask = Image.new("L",(w2-10,290), 255) #Creating a white mask for the current weather tabs
         weather_image.paste(white_mask,(5,115))
@@ -410,7 +418,7 @@ while(True):
         weather_draw.text((10+w2,730),'Waiting for internet...',font = sans_it60,fill = 0)
         weather_draw.text((10,1200),'Waiting for internet...',font = sans_it60,fill = 0)
         weather_draw.text((10+w2,1200),'Waiting for internet...',font = sans_it60,fill = 0)
-        weather_draw.rectangle((w2-325,height-70,w2+325,height), fill=0) #Bottom rectangle for showing last update time
+        weather_draw.rectangle((0,height-90,width,height), fill=0) #Bottom rectangle for showing last update time and room temperature and humidity
         
         weather_draw.text((5,980), quote, font = serif_it40, fill = 255)    # Writing the quote
         
@@ -418,9 +426,8 @@ while(True):
             weather_image.save('weather_ofline.png')    # Saving the image which is generated when when the system is ofline and the weather is not being displayed
             os.chmod('weather_ofline.png',stat.S_IRWXG | stat.S_IRWXO | stat.S_IRWXU)      # Changing the default permission and granting permission to all users
             save_ofline_image = 0'''
-    
             
         epd.frame_buf.paste(weather_image, (0,0))   # Showing ofline weather image on the screen with partial update
         epd.draw_partial(constants.DisplayModes.GL16)
-        time.sleep(30)      # Will check again after 30 seconds to see if the internet is connected or not.
+        time.sleep(30)
 

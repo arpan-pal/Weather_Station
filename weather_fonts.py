@@ -15,6 +15,13 @@ serif60 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerif.ttf',
 serif_bold60 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf', 60)
 serif_it60 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerifItalic.ttf', 60)
 
+sans50 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSans.ttf', 50)
+sans_bold50 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 50)
+sans_it50 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansOblique.ttf', 50)
+serif50 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerif.ttf', 50)
+serif_bold50 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf', 50)
+serif_it50 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerifItalic.ttf', 50)
+
 sans40 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSans.ttf', 40)
 sans_bold40 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 40)
 sans_it40 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansOblique.ttf', 40)

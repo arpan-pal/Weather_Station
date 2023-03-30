@@ -9,6 +9,7 @@ __all__ = [
     'update_quote',
 ]
 import requests
+import random
 
 def print_system_info(display):
     epd = display.epd
@@ -23,18 +24,22 @@ def print_system_info(display):
 
 
 def update_quote():
-    quote_url = 'https://www.quotepub.com/api/widget/?type=qotd_t'
-    quote_data = requests.get(quote_url).json()
-    quote = "Your default quote goes here."
+    quote = "No suitable quote found today. Just wanted to remind you, Arpan loves you. ;)"
     max_len = 105
-    if len(quote_data['quote_body']+quote_data['quote_author'])<max_len:
-        quote = quote_data['quote_body']+' -'+quote_data['quote_author']
-        return quote
-    else:
-        quote_url = 'https://www.quotepub.com/api/widget/?type=rand&limit=7'
-        quote_data = requests.get(quote_url).json()
-        for i in quote_data:
-            if len(i['quote_body']+' -'+i['quote_author'])<max_len:
-                quote = i['quote_body']+' -'+i['quote_author']
-                return quote
+    quote = "No suitable quote found today. Just wanted to remind you, Arpan loves you. :)"
+
+    max_len = 105
+
+    k = 0
+    while(k<7):
+            r = random.randint(0,100)
+            file  = open('Quotes.txt')
+            content = file.readlines()
+            file.close()
+            if len(content[r].rstrip('\n')) < max_len:
+                quote = content[r].rstrip('\n')
+                break
+            else:
+                k+=1
+                continue
     return quote
