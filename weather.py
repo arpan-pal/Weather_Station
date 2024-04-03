@@ -19,12 +19,18 @@ import Adafruit_DHT
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 zip_1 = 99163
 zip_2 = 79415
 =======
 zip_1 = 79415
 zip_2 = 77840
 >>>>>>> d6011eea8e7bc5cb186515a11ffec020e3191a63
+=======
+zip_1 = 99163
+zip_2 = 79415
+
+>>>>>>> 26705cc1fd83f58cd1daa50cf6e884e3ab32096a
 
 api_key_current = "f31a4ef638304f763a223bd5d694ef86"
 #api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
