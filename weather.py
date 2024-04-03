@@ -18,11 +18,12 @@ from weather_fonts import *
 import Adafruit_DHT
 
 
-zip_1 = 79415
-zip_2 = 83843
+zip_1 = 99163
+zip_2 = 79415
 
 api_key_current = "f31a4ef638304f763a223bd5d694ef86"
-api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
+#api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
+api_key_forecast = "6d0eb7fdaf317267b03ead67413616ed"
 
 #Extracting information from zip_1
 search = uszipcode.SearchEngine()
@@ -128,7 +129,7 @@ while(True):
         
         print("\n\nUpdating frist city's weather...\n")
         
-        forecast_url = "http://api.openweathermap.org/data/2.5/onecall?lat="+lat_1+"&lon="+lng_1+"&exclude=minutely,current,alerts&units=imperial&appid="
+        forecast_url = "http://api.openweathermap.org/data/3.0/onecall?lat="+lat_1+"&lon="+lng_1+"&exclude=minutely,current,alerts&units=imperial&appid="
         forecast_url+= api_key_forecast
         
         current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%d&units=imperial&id=524901&appid="%(zip_1)
@@ -250,7 +251,7 @@ while(True):
             
         print("\n\nUpdating second city's weather...\n")
         
-        forecast_url = "http://api.openweathermap.org/data/2.5/onecall?lat="+lat_2+"&lon="+lng_2+"&exclude=minutely,current,alerts&units=imperial&appid="
+        forecast_url = "http://api.openweathermap.org/data/3.0/onecall?lat="+lat_2+"&lon="+lng_2+"&exclude=minutely,current,alerts&units=imperial&appid="
         forecast_url+= api_key_forecast
         
         current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%d&units=imperial&id=524901&appid="%(zip_2)
