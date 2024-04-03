@@ -18,8 +18,13 @@ from weather_fonts import *
 import Adafruit_DHT
 
 
+<<<<<<< HEAD
 zip_1 = 99163
 zip_2 = 79415
+=======
+zip_1 = 79415
+zip_2 = 77840
+>>>>>>> d6011eea8e7bc5cb186515a11ffec020e3191a63
 
 api_key_current = "f31a4ef638304f763a223bd5d694ef86"
 #api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
