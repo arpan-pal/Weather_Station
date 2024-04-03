@@ -21,6 +21,7 @@ import Adafruit_DHT
 zip_1 = 99163
 zip_2 = 79415
 
+
 api_key_current = "f31a4ef638304f763a223bd5d694ef86"
 #api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
 api_key_forecast = "6d0eb7fdaf317267b03ead67413616ed"
