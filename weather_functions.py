@@ -25,18 +25,18 @@ def print_system_info(display):
 
 def update_quote():
     quote = "No suitable quote found today. Just wanted to remind you, Arpan loves you. ;)"
-    max_len = 105
-    quote = "No suitable quote found today. Just wanted to remind you, Arpan loves you. :)"
+    #max_len = 105
+    #quote = "No suitable quote found today. Just wanted to remind you, Arpan loves you. :)"
 
-    max_len = 105
+    max_len = 105 # Maximum length of a quote can be suitably displayed on the display
 
     k = 0
     while(k<7):
-            r = random.randint(0,100)
             file  = open('Quotes.txt')
             content = file.readlines()
             file.close()
-            if len(content[r].rstrip('\n')) < max_len:
+            r = random.randint(0,len(content))
+            if len(content[r].rstrip('\n'))> 1 and len(content[r].rstrip('\n')) < max_len:
                 quote = content[r].rstrip('\n')
                 break
             else:
