@@ -1,5 +1,8 @@
+.env
+
 .ipynb_checkpoints/*
 __pycache__/*
-.env
+
 #API_tester.ipynb
 *.ipynb
+log.txt
