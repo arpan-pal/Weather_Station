@@ -4,3 +4,5 @@ __pycache__/*
 #API_tester.ipynb
 *.ipynb
 log.txt
+*.txt
+.txt
