@@ -27,11 +27,6 @@ load_dotenv(find_dotenv())
 api_key_current = os.environ.get("api_key_current")
 api_key_forecast = os.environ.get("api_key_forecast")
 
-print("api_key_current: ",api_key_current)
-print("api_key_forecast: ",api_key_forecast)
-print("path = ",find_dotenv())
-
-
 #Extracting information from zip_1
 search = uszipcode.SearchEngine()
 zip_info_1 = search.by_zipcode('%d'%zip_1).to_dict()
