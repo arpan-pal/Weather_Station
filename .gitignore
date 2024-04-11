@@ -3,6 +3,3 @@ __pycache__/*
 .env
 #API_tester.ipynb
 *.ipynb
-log.txt
-*.txt
-.txt
