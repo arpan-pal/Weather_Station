@@ -1,5 +1,5 @@
 .ipynb_checkpoints/*
 __pycache__/*
 .env
-API_tester.ipynb
+#API_tester.ipynb
 log.txt
