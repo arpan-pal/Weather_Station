@@ -3,6 +3,6 @@
 .ipynb_checkpoints/*
 __pycache__/*
 
-#API_tester.ipynb
-*.ipynb
+API_tester.ipynb
+#*.ipynb
 #log.txt
