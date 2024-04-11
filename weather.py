@@ -16,15 +16,21 @@ from IT8951 import constants
 from weather_functions import *
 from weather_fonts import *
 import Adafruit_DHT
+from dotenv import load_dotenv, find_dotenv
+
 
 
 zip_1 = 99163
 zip_2 = 79415
 
+load_dotenv(find_dotenv())
+api_key_current = os.environ.get("api_key_current")
+api_key_forecast = os.environ.get("api_key_forecast")
 
-api_key_current = "f31a4ef638304f763a223bd5d694ef86"
-#api_key_forecast = "90ac70f33160278f700a231ac33c7b86"
-api_key_forecast = "6d0eb7fdaf317267b03ead67413616ed"
+print("api_key_current: ",api_key_current)
+print("api_key_forecast: ",api_key_forecast)
+print("path = ",find_dotenv())
+
 
 #Extracting information from zip_1
 search = uszipcode.SearchEngine()
