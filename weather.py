@@ -19,24 +19,25 @@ import Adafruit_DHT
 from dotenv import load_dotenv, find_dotenv
 
 
-
-zip_1 = 99163
-zip_2 = 79415
-
 load_dotenv(find_dotenv())
+
+zip_1 = os.environ.get("zip_1")
+zip_2 = os.environ.get("zip_2")
+
+
 api_key_current = os.environ.get("api_key_current")
 api_key_forecast = os.environ.get("api_key_forecast")
 
 #Extracting information from zip_1
 search = uszipcode.SearchEngine()
-zip_info_1 = search.by_zipcode('%d'%zip_1).to_dict()
+zip_info_1 = search.by_zipcode(zip_1).to_dict()
 state_1 = zip_info_1['state']
 city_1 = zip_info_1['major_city']
 lat_1 = str(zip_info_1['lat'])
 lng_1 = str(zip_info_1['lng'])
 
 #Extracting information from zip_2
-zip_info_2 = search.by_zipcode('%d'%zip_2).to_dict()
+zip_info_2 = search.by_zipcode(zip_2).to_dict()
 state_2 = zip_info_2['state']
 city_2 = zip_info_2['major_city']
 lat_2 = str(zip_info_2['lat'])
@@ -134,7 +135,7 @@ while(True):
         forecast_url = "http://api.openweathermap.org/data/3.0/onecall?lat="+lat_1+"&lon="+lng_1+"&exclude=minutely,current,alerts&units=imperial&appid="
         forecast_url+= api_key_forecast
         
-        current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%d&units=imperial&id=524901&appid="%(zip_1)
+        current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%s&units=imperial&id=524901&appid="%(zip_1)
         current_url+= api_key_current
         
         weather_forecast_1 = requests.get(forecast_url).json()
@@ -256,7 +257,7 @@ while(True):
         forecast_url = "http://api.openweathermap.org/data/3.0/onecall?lat="+lat_2+"&lon="+lng_2+"&exclude=minutely,current,alerts&units=imperial&appid="
         forecast_url+= api_key_forecast
         
-        current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%d&units=imperial&id=524901&appid="%(zip_2)
+        current_url = "http://api.openweathermap.org/data/2.5/weather?zip=%s&units=imperial&id=524901&appid="%(zip_2)
         current_url+= api_key_current
         
         weather_forecast_2 = requests.get(forecast_url).json()
