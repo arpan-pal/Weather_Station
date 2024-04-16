@@ -11,7 +11,6 @@ __all__ = [
 #import requests
 import os
 import random
-from openai import OpenAI
 import json
 from dotenv import load_dotenv, find_dotenv
 
@@ -35,6 +34,7 @@ def update_quote():
     max_len = 105 # Maximum length of a quote so that it can be suitably displayed on the display
 
     try:
+        from openai import OpenAI
         k = 0
         while(k<3):
             client = OpenAI(api_key=openai_api_key)
